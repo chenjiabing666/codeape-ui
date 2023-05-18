@@ -39,9 +39,9 @@ export const tableOption = {
       trigger: 'blur'
     },
     {
-      min: 3,
+      min: 2,
       max: 20,
-      message: '长度在 3 到 20 个字符',
+      message: '长度在 2 到 20 个字符',
       trigger: 'blur'
     }]
   }, {
@@ -56,9 +56,9 @@ export const tableOption = {
       trigger: 'blur'
     },
     {
-      min: 3,
+      min: 2,
       max: 20,
-      message: '长度在 3 到 20 个字符',
+      message: '长度在 2 到 20 个字符',
       trigger: 'blur'
     }
     ]
@@ -74,9 +74,9 @@ export const tableOption = {
       trigger: 'blur'
     },
     {
-      min: 3,
+      min: 2,
       max: 100,
-      message: '长度在 3 到 100 个字符',
+      message: '长度在 2 到 100 个字符',
       trigger: 'blur'
     }]
   }, {

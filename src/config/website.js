@@ -4,7 +4,7 @@ export default {
     key: "codeape", //配置主键,目前用于存储
     title: "码猿慢病云管理系统",
     indexTitle: "码猿慢病云管理系统",
-    validateCode: true,//是否开启验证码校验
+    validateCode: false,//是否开启验证码校验
     register: true, //是否开启注册
     formLoginClient: 'pig:pig',// 用户名密码登录的 client 信息
     smsLoginClient: 'app:app',// 验证码登录的 client 信息
