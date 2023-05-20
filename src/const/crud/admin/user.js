@@ -55,9 +55,7 @@ export const checkPassword = (rule, value, callback) => {
 
 // 设置手机号的验证规则
 export const checkPhone = (rule, value, callback) => {
-    if (!value) {
-        callback(new Error('请输入手机号'))
-    } else {
+    if (value) {
         const reg = /^1[3|4|5|7|8][0-9]\d{8}$/
         if (!reg.test(value)) {
             return callback(new Error('请输入正确的电话'))
@@ -68,14 +66,16 @@ export const checkPhone = (rule, value, callback) => {
         return callback()
     }
 
-    isExist({phone: value}).then(response => {
-        const result = response.data.data
-        if (result) {
-            return callback(new Error('手机号已经存在'))
-        } else {
-            return callback()
-        }
-    })
+    if (value){
+        isExist({phone: value}).then(response => {
+            const result = response.data.data
+            if (result) {
+                return callback(new Error('手机号已经存在'))
+            } else {
+                return callback()
+            }
+        })
+    }
 }
 
 export const tableOption = {
@@ -95,7 +95,7 @@ export const tableOption = {
         fixed: true, label: 'id', prop: 'userId', span: 24, hide: true, editDisplay: false, addDisplay: false
     }, {
         fixed: true,
-        label: '用户名',
+        label: '账号',
         prop: 'username',
         editDisabled: true,
         slot: true,
@@ -106,7 +106,32 @@ export const tableOption = {
         }, {
             min: 3, max: 20, message: '长度在 3 到 20 个字符', trigger: 'blur'
         }, {validator: validateUsername, trigger: 'blur'}]
+    },{
+        fixed: true,
+        label: '姓名',
+        prop: 'name',
+        editDisabled: true,
+        slot: true,
+        search: true,
+        span: 24,
+        rules: [{
+            required: true, message: '请输入姓名'
+        }, {
+            min: 1, max: 10, message: '长度在 1 到 10 个字符', trigger: 'blur'
+        }]
     }, {
+        label: '性别',
+        prop: 'gender',
+        type: 'radio',
+        slot: true,
+        border: true,
+        span: 24,
+        value: '1',
+        dicUrl: '/admin/dict/key/sex_type',
+        rules: [{
+            required: true, message: '请选择性别', trigger: 'blur'
+        }]
+    },{
         label: '密码',
         prop: 'password',
         type: 'password',
@@ -115,12 +140,13 @@ export const tableOption = {
         span: 24,
         rules: [{validator: checkPassword, trigger: 'blur'}]
     }, {
-        label: '所属部门', prop: 'deptId', formslot: true, slot: true, span: 24, hide: true, rules: [{
-            required: true, message: '请选择部门', trigger: 'change'
-        }]
+        label: '所属科室', prop: 'deptId', formslot: true, slot: true, span: 24, hide: true,
+        rules: [{
+            required: true, message: '请选择科室', trigger: 'change'
+        }],
     }, {
         label: '手机号', prop: 'phone', value: '', span: 24, rules: [{
-            required: true, message: '手机号不能为空', trigger: 'blur'
+            required: false, message: '手机号不能为空', trigger: 'blur'
         }, {
             validator: checkPhone, trigger: 'blur'
         }]
@@ -129,10 +155,14 @@ export const tableOption = {
             required: true, message: '请选择角色', trigger: 'blur'
         }]
     }, {
-        label: '部门', prop: 'deptName', overHidden: true, addDisplay: false, editDisplay: false, span: 24
+        label: '科室', prop: 'deptName', overHidden: true, addDisplay: false, editDisplay: false, span: 24
     }, {
-        label: '岗位', prop: 'post', width: 168, overHidden: true, formslot: true, slot: true, span: 24, rules: [{
-            required: true, message: '请选择岗位', trigger: 'blur'
+        label: '职称', prop: 'post', width: 168, overHidden: true, formslot: true, slot: true, span: 24, rules: [{
+            required: true, message: '请选择职称', trigger: 'blur'
+        }]
+    },{
+        label: '科室权限', prop: 'auth', width: 168, overHidden: true, formslot: true, slot: true, span: 24,hide:true, rules: [{
+            required: true, message: '请选择科室权限', trigger: 'blur'
         }]
     }, {
         label: '状态',

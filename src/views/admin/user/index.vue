@@ -97,13 +97,13 @@
           </el-button>
         </template>
         <template #deptId-form>
-          <avue-input-tree
+          <avue-select
             v-model="form.deptId"
-            placeholder="请选择所属部门"
+            placeholder="请选择所属科室"
             :node-click="getNodeData"
             :dic="treeDeptData"
             :props="defaultProps"
-          ></avue-input-tree>
+          ></avue-select>
         </template>
         <template #role-form>
           <avue-select
@@ -121,6 +121,16 @@
             placeholder="请选择岗位"
             :dic="postOptions"
             :props="postProps"
+          ></avue-select>
+        </template>
+
+        <template #auth-form>
+          <avue-select
+                  v-model="auth"
+                  multiple
+                  placeholder="请选择科室权限"
+                  :dic="authOptions"
+                  :props="defaultProps"
           ></avue-select>
         </template>
       </avue-crud>
@@ -142,7 +152,7 @@
 import { addObj, delObj, fetchList, putObj } from '@/api/admin/user'
 import { deptRoleList } from '@/api/admin/role'
 import { listPosts } from '@/api/admin/post'
-import { fetchTree } from '@/api/admin/dept'
+import { fetchTree,fetchDept} from '@/api/admin/dept'
 import { tableOption } from '@/const/crud/admin/user'
 import { mapGetters } from 'vuex'
 import ExcelUpload from '@/components/ExcelUpload/index.vue'
@@ -159,13 +169,17 @@ export default {
         label: 'postName',
         value: 'postId'
       },
+      authProps: {
+        label: 'deptName',
+        value: 'deptId'
+      },
       roleProps: {
         label: 'roleName',
         value: 'roleId'
       },
       defaultProps: {
         label: 'name',
-        value: 'id'
+        value: 'deptId'
       },
       page: {
         total: 0, // 总页数
@@ -180,7 +194,9 @@ export default {
       role: [],
       form: {},
       postOptions: [],
-      rolesOptions: []
+      rolesOptions: [],
+      auth:[],
+      authOptions: []
     }
   },
   computed: {
@@ -192,6 +208,9 @@ export default {
     },
     post() {
       this.form.post = this.post
+    },
+    auth(){
+      this.form.auth=this.auth
     }
   },
   methods: {
@@ -238,8 +257,10 @@ export default {
     handleOpenBefore(show, type) {
       window.boxType = type
       // 查询部门树
-      fetchTree().then(response => {
+      fetchDept().then(response => {
         this.treeDeptData = response.data.data
+        this.authOptions=response.data.data;
+        console.log("authOptions=",this.authOptions)
       })
       // 查询角色列表
       deptRoleList().then(response => {
@@ -259,10 +280,16 @@ export default {
         for (let i = 0; i < this.form.postList.length; i++) {
           this.post[i] = this.form.postList[i].postId
         }
+
+        this.auth = []
+        for (let i = 0; i < this.form.authList.length; i++) {
+          this.auth[i] = this.form.authList[i].deptId
+        }
       } else if (type === 'add') {
         // 若是添加角色列表设置为空
         this.role = []
         this.post = []
+        this.auth = []
       }
       show()
     },
@@ -271,6 +298,7 @@ export default {
       this.form.password = undefined
     },
     create(row, done, loading) {
+      console.log("this.form=",this.form)
       addObj(this.form)
         .then(() => {
           this.getList(this.page)

@@ -35,6 +35,17 @@
 
       </el-input>
     </el-form-item>
+
+    <el-form-item>
+      <el-select v-model="loginForm.hosId" placeholder="请选择机构" auto-complete="off" size="small">
+        <el-option label="区域一" value="shanghai"></el-option>
+        <el-option label="区域二" value="beijing"></el-option>
+      </el-select>
+      <template #prefix>
+        <i class="icon-mima"></i>
+      </template>
+    </el-form-item>
+
     <el-form-item v-if="website.validateCode" prop="code">
       <el-input
         v-model="loginForm.code"
@@ -88,7 +99,8 @@ export default {
         username: 'admin',
         password: '123456',
         code: '',
-        randomStr: ''
+        randomStr: '',
+        hosId:''
       },
       checked: false,
       code: {

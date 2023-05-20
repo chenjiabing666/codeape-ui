@@ -26,7 +26,7 @@ const scope = 'server'
 
 export const loginByUsername = (username, password, code, randomStr) => {
   const grant_type = 'password'
-  const dataObj = qs.stringify({ 'username': username, 'password': password })
+  const dataObj = qs.stringify({ 'username': username, 'password': password,'hosId':'1659018792143663105' })
 
   const basicAuth = 'Basic ' + window.btoa(website.formLoginClient)
 

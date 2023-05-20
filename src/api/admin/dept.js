@@ -25,6 +25,14 @@ export function fetchDeptTree(query) {
   })
 }
 
+export function fetchDept(query) {
+  return request({
+    url: '/admin/dept/list',
+    method: 'get',
+    params: query
+  })
+}
+
 export function fetchTree(query) {
   return request({
     url: '/admin/dept/tree',
