@@ -65,8 +65,7 @@ export const checkPhone = (rule, value, callback) => {
     if (window.boxType === 'edit') {
         return callback()
     }
-
-    if (value){
+    if(value){
         isExist({phone: value}).then(response => {
             const result = response.data.data
             if (result) {
@@ -76,6 +75,7 @@ export const checkPhone = (rule, value, callback) => {
             }
         })
     }
+
 }
 
 export const tableOption = {
@@ -102,11 +102,11 @@ export const tableOption = {
         search: true,
         span: 24,
         rules: [{
-            required: true, message: '请输入用户名'
+            required: true, message: '请输入账号'
         }, {
             min: 3, max: 20, message: '长度在 3 到 20 个字符', trigger: 'blur'
         }, {validator: validateUsername, trigger: 'blur'}]
-    },{
+    }, {
         fixed: true,
         label: '姓名',
         prop: 'name',
@@ -117,9 +117,9 @@ export const tableOption = {
         rules: [{
             required: true, message: '请输入姓名'
         }, {
-            min: 1, max: 10, message: '长度在 1 到 10 个字符', trigger: 'blur'
+            min: 1, max: 5, message: '长度在 1 到 5 个字符', trigger: 'blur'
         }]
-    }, {
+    },{
         label: '性别',
         prop: 'gender',
         type: 'radio',
@@ -140,22 +140,25 @@ export const tableOption = {
         span: 24,
         rules: [{validator: checkPassword, trigger: 'blur'}]
     }, {
-        label: '所属科室', prop: 'deptId', formslot: true, slot: true, span: 24, hide: true,
+        label: '所属科室',type:"select", prop: 'deptId', formslot: true, slot: true, span: 24,search: true,
+        dicUrl: '/admin/dept/list',
+        props:{
+            label: 'name',
+            value: 'deptId'
+        },
         rules: [{
             required: true, message: '请选择科室', trigger: 'change'
         }],
     }, {
-        label: '手机号', prop: 'phone', value: '', span: 24, rules: [{
-            required: false, message: '手机号不能为空', trigger: 'blur'
-        }, {
-            validator: checkPhone, trigger: 'blur'
-        }]
+        label: '手机号', prop: 'phone', value: '', span: 24
+        //todo：未知原因，加上这行代码走不通，暂时注释
+        // , rules: [{validator: checkPhone, trigger: 'blur'}]
     }, {
-        label: '角色', prop: 'role', formslot: true, slot: true, overHidden: true, span: 24, rules: [{
+        label: '角色', prop: 'role', formslot: true, slot: true, overHidden: true, span: 24, hide:true,rules: [{
             required: true, message: '请选择角色', trigger: 'blur'
         }]
     }, {
-        label: '科室', prop: 'deptName', overHidden: true, addDisplay: false, editDisplay: false, span: 24
+        label: '科室', prop: 'deptName', overHidden: true, addDisplay: false, editDisplay: false, span: 24,
     }, {
         label: '职称', prop: 'post', width: 168, overHidden: true, formslot: true, slot: true, span: 24, rules: [{
             required: true, message: '请选择职称', trigger: 'blur'

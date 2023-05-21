@@ -33,6 +33,13 @@ export function addObj(obj) {
   })
 }
 
+export const fetchHos = (username) => {
+  return request({
+    url: '/admin/syshospital/listByUserName/'+username,
+    method: 'get'
+  })
+}
+
 export function getObj(id) {
   return request({
     url: '/admin/syshospital/' + id,

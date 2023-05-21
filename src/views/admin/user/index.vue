@@ -100,7 +100,6 @@
           <avue-select
             v-model="form.deptId"
             placeholder="请选择所属科室"
-            :node-click="getNodeData"
             :dic="treeDeptData"
             :props="defaultProps"
           ></avue-select>

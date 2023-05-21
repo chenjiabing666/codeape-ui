@@ -24,9 +24,10 @@ import website from '@/config/website'
 
 const scope = 'server'
 
-export const loginByUsername = (username, password, code, randomStr) => {
+
+export const loginByUsername = (username, password, code, randomStr,hosId) => {
   const grant_type = 'password'
-  const dataObj = qs.stringify({ 'username': username, 'password': password,'hosId':'1659018792143663105' })
+  const dataObj = qs.stringify({ 'username': username, 'password': password,'hosId':hosId })
 
   const basicAuth = 'Basic ' + window.btoa(website.formLoginClient)
 

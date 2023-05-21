@@ -4,7 +4,7 @@
       <el-form :inline="true">
         <el-form-item>
           <el-button
-            v-if="permissions.sys_menu_add"
+            v-if="permissions.sys_dept_add"
             icon="el-icon-plus"
             type="primary"
             @click="addOrUpdateHandle(false)"

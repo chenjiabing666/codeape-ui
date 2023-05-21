@@ -12,6 +12,8 @@
         v-model="loginForm.username"
         auto-complete="off"
         placeholder="请输入用户名"
+        @blur="listHos"
+        @focus="clearHos"
         @keyup.enter.native="handleLogin"
       >
         <template #prefix>
@@ -36,14 +38,18 @@
       </el-input>
     </el-form-item>
 
-    <el-form-item>
+    <el-form-item prop="hosId">
       <el-select v-model="loginForm.hosId" placeholder="请选择机构" auto-complete="off" size="small">
-        <el-option label="区域一" value="shanghai"></el-option>
-        <el-option label="区域二" value="beijing"></el-option>
+        <el-option
+                v-for="item in options"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value">
+        </el-option>
+        <template #prefix>
+          <i class="icon-mima"></i>
+        </template>
       </el-select>
-      <template #prefix>
-        <i class="icon-mima"></i>
-      </template>
     </el-form-item>
 
     <el-form-item v-if="website.validateCode" prop="code">
@@ -90,11 +96,13 @@
 <script>
 import { randomLenNum } from '@/util'
 import { mapGetters } from 'vuex'
+import {fetchHos} from '@/api/admin/syshospital'
 
 export default {
   name: 'userlogin',
   data() {
     return {
+      options: [],
       loginForm: {
         username: 'admin',
         password: '123456',
@@ -118,6 +126,9 @@ export default {
           { required: true, message: '请输入密码', trigger: 'blur' },
           { min: 6, message: '密码长度最少为6位', trigger: 'blur' }
         ],
+        hosId: [
+          { required: true, message: '请选择一个登录的机构', trigger: 'blur' }
+        ],
         code: [{ required: true, message: '请输入验证码', trigger: 'blur' }]
       }
     }
@@ -131,6 +142,18 @@ export default {
     ...mapGetters(['tagWel', 'website'])
   },
   methods: {
+    clearHos(){
+      this.options=[]
+    },
+    listHos(){
+      fetchHos(this.loginForm.username).then(response => {
+        for (let i = 0; i < response.data.data.length; i++) {
+          let data=response.data.data[i];
+          let obj={label:data.name,value:data.id}
+          this.options.push(obj)
+        }
+      })
+    },
     refreshCode() {
       this.loginForm.code = ''
       this.loginForm.randomStr = randomLenNum(this.code.len, true)
