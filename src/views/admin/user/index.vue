@@ -297,7 +297,6 @@ export default {
       this.form.password = undefined
     },
     create(row, done, loading) {
-      console.log("this.form=",this.form)
       addObj(this.form)
         .then(() => {
           this.getList(this.page)
