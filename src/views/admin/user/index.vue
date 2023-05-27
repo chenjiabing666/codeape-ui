@@ -308,7 +308,6 @@ export default {
         })
     },
     update(row, index, done, loading) {
-      console.log('this.form', this.form)
       putObj(this.form)
         .then(() => {
           this.getList(this.page)
