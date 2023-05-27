@@ -1,4 +1,3 @@
-
 <template>
     <div class="execution">
         <basic-container>
@@ -16,21 +15,18 @@
                        @row-update="handleUpdate"
                        @row-save="handleSave"
                        @row-del="rowDel">
-                <template slot="menuLeft" >
-                    <el-button type="primary">自定义按钮</el-button>
-                </template>
             </avue-crud>
         </basic-container>
     </div>
 </template>
 
 <script>
-    import {fetchList, getObj, addObj, putObj, delObj} from '@/api/device/paper/paper'
-    import {tableOption} from '@/const/crud/device/paper/paper'
+    import {fetchList, getObj, addObj, putObj, delObj} from '@/api/device/liquid/liquid'
+    import {tableOption} from '@/const/crud/device/liquid/liquid'
     import {mapGetters} from 'vuex'
 
     export default {
-        name: 'paper',
+        name: 'liquid',
         data() {
             return {
                 searchForm: {},
@@ -48,9 +44,9 @@
             ...mapGetters(['permissions']),
             permissionList() {
                 return {
-                    addBtn: this.validData(this.permissions.device_paperinfo_add, false),
-                    delBtn: this.validData(this.permissions.device_paperinfo_del, false),
-                    editBtn: this.validData(this.permissions.device_paperinfo_edit, false)
+                    addBtn: this.validData(this.permissions.device_qcliquidinfo_add, false),
+                    delBtn: this.validData(this.permissions.device_qcliquidinfo_del, false),
+                    editBtn: this.validData(this.permissions.device_qcliquidinfo_edit, false)
                 };
             }
         },

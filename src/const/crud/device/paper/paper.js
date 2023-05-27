@@ -116,15 +116,15 @@ export const tableOption = {
       "prop": "sampleType",
       dicData: [
         {
-          label: '血糖试纸',
+          label: '血糖',
           value: '1'
         },
         {
-          label: '尿酸试纸',
+          label: '血酮',
           value: '2'
         },
         {
-          label: '尿酸试纸',
+          label: '尿酸',
           value: '3'
         },
       ],
