@@ -146,7 +146,10 @@ export const tableOption = {
     {
       "type": "input",
       "label": "入库人",
-      "prop": "enterName"
+      "prop": "enterName",
+      display:false,
+      "addDisplay": false,
+      "editDisabled": true
     },
   ]
 }

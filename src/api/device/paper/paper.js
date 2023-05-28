@@ -16,6 +16,14 @@ export function addObj(obj) {
   })
 }
 
+export function getObjByDeptId(obj) {
+  return request({
+    url: '/device/paper/deptId',
+    method: 'post',
+    data: obj
+  })
+}
+
 export function getObj(id) {
   return request({
     url: '/device/paper/' + id,
