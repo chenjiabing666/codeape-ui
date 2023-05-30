@@ -16,28 +16,18 @@
                        @row-update="handleUpdate"
                        @row-save="handleSave"
                        @row-del="rowDel">
-                <template #menu-left>
-                    <el-button
-                            v-if="permissions.admin_systimetype_del"
-                            class="filter-item"
-                            type="primary"
-                            icon="el-icon-refresh-left"
-                            @click="handleClearSysTimeTypeCache"
-                    >缓存
-                    </el-button>
-                </template>
             </avue-crud>
         </basic-container>
     </div>
 </template>
 
 <script>
-    import {fetchList, getObj, addObj, putObj, delObj,clearSysTimeTypeCache} from '@/api/admin/systimetype'
-    import {tableOption} from '@/const/crud/admin/systimetype'
+    import {fetchList, getObj, addObj, putObj, delObj} from '@/api/device/count/qccount'
+    import {tableOption} from '@/const/crud/device/count/qccount'
     import {mapGetters} from 'vuex'
 
     export default {
-        name: 'systimetype',
+        name: 'qccount',
         data() {
             return {
                 searchForm: {},
@@ -55,9 +45,9 @@
             ...mapGetters(['permissions']),
             permissionList() {
                 return {
-                    addBtn: this.validData(this.permissions.admin_systimetype_add, false),
-                    delBtn: this.validData(this.permissions.admin_systimetype_del, false),
-                    editBtn: this.validData(this.permissions.admin_systimetype_edit, false)
+                    addBtn: this.validData(this.permissions.device_qccount_add, false),
+                    delBtn: this.validData(this.permissions.device_qccount_del, false),
+                    editBtn: this.validData(this.permissions.device_qccount_edit, false)
                 };
             }
         },
@@ -119,12 +109,6 @@
             },
             refreshChange() {
                 this.getList(this.page)
-            },
-            handleClearSysTimeTypeCache: function() {
-                clearSysTimeTypeCache().then(() => {
-                    this.$message.success('清除缓存成功')
-                }).catch(function() {
-                })
             }
         }
     }

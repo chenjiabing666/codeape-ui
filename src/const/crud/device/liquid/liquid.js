@@ -24,6 +24,7 @@ export const tableOption = {
     {
       "type": "select",
       "label": "科室",
+      search:true,
       "prop": "deptId",
       dicUrl: '/admin/dept/list',
       props:{
@@ -37,6 +38,7 @@ export const tableOption = {
     {
       "type": "select",
       "label": "样本类型",
+      search:true,
       "prop": "sampleType",
       dicData: [
         {

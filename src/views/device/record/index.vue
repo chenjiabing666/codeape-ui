@@ -37,6 +37,16 @@
                     ></avue-select>
                 </template>
 
+                <template #sampleType-form>
+                    <avue-select
+                            v-model="form.sampleType"
+                            placeholder="请选择样本类型"
+                            :dic="sampleTypeData"
+                            :props="sampleTypeProps"
+                            @change="handleSampleTypeChange"
+                    ></avue-select>
+                </template>
+
                 <template #liquidId-form>
                     <avue-select
                             v-model="form.liquidId"
@@ -85,6 +95,24 @@
                     value: 'id'
                 },
                 treeDeptData: [],
+                sampleTypeData:[
+                    {
+                        label: '血糖',
+                        value: '1'
+                    },
+                    {
+                        label: '血酮',
+                        value: '2'
+                    },
+                    {
+                        label: '尿酸',
+                        value: '3'
+                    },
+                ],
+                sampleTypeProps:{
+                    label: 'label',
+                    value: 'value'
+                },
                 paperData:[],
                 liquidData:[]
 
@@ -168,12 +196,54 @@
                 show()
             },
             handleChange(value){
+                console.log("handleChange",value)
                 //先清空选择的内容
                 this.form.liquidId=null
                 this.form.paperId=null
                 if (value.value.trim()==='')
                     return;
-                let params={'deptId':value.value}
+                let params={
+                    'deptId':value.value,
+                    "sampleType":this.form.sampleType
+                }
+                //获取试纸
+                getObjByDeptId(params).then(response => {
+                    this.paperData = response.data.data
+                })
+
+                //获取质控液
+                getLiquidByDeptId(params).then(response => {
+                    let result= response.data.data
+                    // 创建一个新的数组，将其中的第一个元素的 name 属性改为 "Alex"
+                    let newArray = result.map((obj, index) => {
+                        if(obj.type===1){
+                            let str=obj.batchNum+'-'+'低浓度'
+                            return {...obj, batchNum: str};
+                        }else if(obj.type===2){
+                            let str=obj.batchNum+'-'+'中浓度'
+                            return {...obj, batchNum: str};
+                        }else {
+                            let str=obj.batchNum+'-'+'高浓度'
+                            return {...obj, batchNum: str};
+                        }
+                    });
+                    this.liquidData=newArray;
+                })
+
+            },
+            handleSampleTypeChange(value){
+                console.log("handleSampleTypeChange",value)
+                //先清空选择的内容
+                this.form.liquidId=null
+                this.form.paperId=null
+                if (value.value.trim()==='')
+                    return;
+                if (this.form.deptId==='')
+                    return;
+                let params={
+                    'deptId':this.form.deptId,
+                    "sampleType":value.value
+                }
                 //获取试纸
                 getObjByDeptId(params).then(response => {
                     this.paperData = response.data.data

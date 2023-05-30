@@ -276,7 +276,6 @@ export const tableOption = {
       display:false,
       "addDisplay": false,
       "editDisabled": true,
-      "hide":true,
       "prop": "lastQcTime"
     },
     {
