@@ -7,6 +7,8 @@ export const tableOption = {
   "align": "center",
   "searchMenuSpan": 6,
   addBtn:false,
+  viewBtnText:"查看",
+  viewBtn:true,
    menu:false,
   printBtn:true,
   "column": [

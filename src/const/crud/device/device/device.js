@@ -7,6 +7,8 @@ export const tableOption = {
   "stripe": true,
   "menuAlign": "center",
   "align": "center",
+  viewBtnText:"查看",
+  viewBtn:true,
   "searchMenuSpan": 6,
   "column": [
     {

@@ -5,7 +5,12 @@ export const tableOption = {
   "stripe": true,
   "menuAlign": "center",
   "align": "center",
+  addBtn:false,
+  editBtnText: '办理住院',
+  editTitle: '办理住院',
+  viewBtnText:"查看",
   viewBtn:true,
+  delBtn:false,
   "searchMenuSpan": 6,
   "column": [
     {
@@ -47,8 +52,16 @@ export const tableOption = {
       "prop": "bedNum"
     },
     {
+      "type": "input",
+      "addDisplay": false,
+      "label": "出院时间",
+      "editDisabled": true,
+      "prop": "leaveTime"
+    },
+    {
       "type": "datetime",
       "label": "入院时间",
+      hide: true,
       format: 'YYYY-MM-DD HH:mm:ss',
       valueFormat: 'YYYY-MM-DD HH:mm:ss',
       "prop": "iptTime",
@@ -100,6 +113,7 @@ export const tableOption = {
       "type": "select",
       "label": "主治医生",
       "prop": "docId",
+      hide: true,
       dicUrl: '/admin/user/list/IN_HOS_DOC',
       props:{
         label: 'name',
@@ -116,15 +130,6 @@ export const tableOption = {
         label: 'name',
         value: 'userId'
       },
-    },
-
-    {
-      "type": "input",
-      hide: true,
-      "addDisplay": false,
-      "label": "出院时间",
-      "editDisabled": true,
-      "prop": "leaveTime"
     },
 
     {

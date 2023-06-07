@@ -10,6 +10,14 @@ export function fetchList(query) {
   })
 }
 
+export function fetchOutList(query) {
+  return request({
+    url: '/inhos/pat/out/page',
+    method: 'get',
+    params: query
+  })
+}
+
 export function addObj(obj) {
   return request({
     url: '/inhos/pat',
@@ -44,6 +52,14 @@ export function putObj(obj) {
   return request({
     url: '/inhos/pat',
     method: 'put',
+    data: obj
+  })
+}
+
+export function inObj(obj) {
+  return request({
+    url: '/inhos/pat/in',
+    method: 'post',
     data: obj
   })
 }
