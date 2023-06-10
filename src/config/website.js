@@ -1,7 +1,7 @@
 export default {
-    version: "v3.6.7", // 控制首页显示的版本号
-    logo: "codeape",   // 侧边栏搜索的时候顶部展示的文案
-    key: "codeape", //配置主键,目前用于存储
+    version: "v1.0.0", // 控制首页显示的版本号
+    logo: "codeape-cloud",   // 侧边栏搜索的时候顶部展示的文案
+    key: "codeape-cloud", //配置主键,目前用于存储
     title: "码猿慢病云管理系统",
     indexTitle: "码猿慢病云管理系统",
     validateCode: false,//是否开启验证码校验
