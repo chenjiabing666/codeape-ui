@@ -27,7 +27,7 @@
     import {mapGetters} from 'vuex'
 
     export default {
-        name: 'pattransfer',
+        name: 'transfer',
         data() {
             return {
                 searchForm: {},
