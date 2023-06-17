@@ -61,14 +61,14 @@
             :size="size"
             @click="handlePermission(row,index)">权限
           </el-button>
-          <el-button
-            v-if="permissions.sys_role_del"
-            text
-            type="primary"
-            icon="el-icon-delete"
-            :size="size"
-            @click="handleDelete(row,index)">删除
-          </el-button>
+<!--          <el-button-->
+<!--            v-if="permissions.sys_role_del"-->
+<!--            text-->
+<!--            type="primary"-->
+<!--            icon="el-icon-delete"-->
+<!--            :size="size"-->
+<!--            @click="handleDelete(row,index)">删除-->
+<!--          </el-button>-->
         </template>
       </avue-crud>
 
